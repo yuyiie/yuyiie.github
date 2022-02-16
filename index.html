@@ -1,20 +1,89 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Yuyi 2020</title><link rel="shortcut icon" href=/favicon.ico><link href=/static/css/app.fcbd6c63f573c12614d6b4775eef316c.css rel=stylesheet></head><style media=screen type=text/css>#appLoading { width: 100%; height: 100%; }
-    .logo {
-      animation: spin 1s linear infinite;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>520</title>
+    <style>
+        .h-container {
+            position:relative;
+            width: 100px;
+            height: 100px;
+            margin:auto
+        }
+        .h-circle {
+            background-color: #f7b3ae;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .h-rect {
+            position: absolute;
+            background-color: #f7b3ae;
+            top: 24px;
+            left: 23px;
+            width: 52px;
+            height: 48px;
+            z-index: 3;
+            transform: rotateZ(45deg);
+        }
+        .right {
+            position:absolute;
+            top:0px;
+            left: 50px;
+        }
+        .content{
+            text-align: center;
+        }
+        .mark {
+            font-size: 30px;
+            font-weight: 200;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+    <div class="h-container">
+        <div class="h-circle"></div>
+        <div class="h-circle right"></div>
+        <div class="h-rect"></div>
+    </div>
+    <div class="couple-name mark">CCX & XYY</div>
+    <div class="record">
+        <div class="item-name">我们相识于<span id="meet-date" class="mark"></span>，距今<span id="meetDays" class="mark"></span>天</div>
+        <div class="item-name"><span id="together-date" class="mark"></span>在一起，距今<span id="togetherDays" class="mark"></span></div>
+        <div class="item-value" id="count"></div>
+    </div>
+    </div>
+</body>
+<script>
+    var meetDateStr = '2021-06-04'
+    var meetDate = new Date(meetDateStr)
+    var meetDays = Math.floor((Date.now() - meetDate.getTime())/(24*60*60*1000))
+    document.getElementById('meet-date').innerText = meetDateStr
+    document.getElementById('meetDays').innerText = meetDays
+    var togetherDateStr = '2021-11-09 05:20:00'
+    var togetherDate = new Date(togetherDateStr)
+    document.getElementById('together-date').innerText = togetherDateStr
+    function paddle(n) {
+        return n < 10?'0'+n:n
     }
-    @keyframes spin {
-      from {
-        transform: rotatY(0deg);
-      }
-      to {
-        transform: rotateY(360deg);
-      }
+    var oneDay = 24*60*60*1000
+    var hh = 60*60*1000
+    var mm = 60*1000
+    var ss = 1000
+    function format(n){
+        return paddle(Math.floor(n))
     }
-    #appLoading>div {
-         position: absolute;
-         display: block;
-         top: 50%;
-         left: 50%;
-         text-align: center;
-         transform: translateY(-50%)  translateX(-50%);
-     }</style><body><div id=appLoading><div><div class=loading-icon><svg class=logo width=40 height=40 xmlns=http://www.w3.org/2000/svg xmlns:svg=http://www.w3.org/2000/svg class=d-block><title>Yuyi 2020</title><g><title>Yuyi 2020</title><path fill=#409eff d="m30.28705,2.205717a5.461456,5.371573 0 0 1 5.444081,5.354484l0,23.24074a5.461456,5.371573 0 0 1 -5.444081,5.354484l-23.629627,0a5.461456,5.371573 0 0 1 -5.444081,-5.354484l0,-23.24074a5.461456,5.371573 0 0 1 5.444081,-5.354484l23.629627,0m0,-0.455701l-23.629627,0c-3.249074,0 -5.907407,2.614583 -5.907407,5.810185l0,23.24074c0,3.195602 2.658333,5.810185 5.907407,5.810185l23.629627,0c3.249074,0 5.907407,-2.614583 5.907407,-5.810185l0,-23.24074c0,-3.195602 -2.658333,-5.810185 -5.907407,-5.810185z" id=svg_1 /><rect fill=#409eff stroke-width=null stroke-dasharray=null stroke-linejoin=null stroke-linecap=null x=20.693787 y=7.255486 width=6.112375 height=12.322375 transform="rotate(45 23.749975204467777,13.416672706603999) " id=svg_3 /><rect fill=#409eff stroke-width=null stroke-dasharray=null stroke-linejoin=null stroke-linecap=null x=10.693828 y=7.2555 width=6.112379 height=12.322356 transform="rotate(-45 13.75001716613769,13.416678428649897) " id=svg_4 /><path fill=#409eff stroke-width=null stroke-dasharray=null stroke-linejoin=null stroke-linecap=null d="m16,18.472425c0,0 0,11.580037 0,11.529579c0,-0.050458 6,-0.025229 6,-0.075687c0,-0.050458 0,-11.529579 0,-11.529579c0,0 -2.909091,-2.346282 -2.909091,-2.39674" id=svg_5 /></g></svg></div><span class=loading-text>Loading...</span></div></div><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.2c0d038562aefd624581.js></script><script type=text/javascript src=/static/js/app.f1c53fa50225a228f2e0.js></script></body></html>
+    function getTime(){
+        var milli = Date.now() - togetherDate.getTime()
+        var togetherDays = format(milli/oneDay)
+        var thh = format((milli - togetherDays * oneDay)/hh)
+        var tmm = format((milli - thh * hh - togetherDays * oneDay)/mm)
+        var tss = format((milli - tmm*mm - thh * hh - togetherDays * oneDay)/ss)
+        document.getElementById('togetherDays').innerText = `${togetherDays}天${thh}时${tmm}分${tss}秒`
+    }
+    setInterval(getTime,1)
+</script>
+</html>
